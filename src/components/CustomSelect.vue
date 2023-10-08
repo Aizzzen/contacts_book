@@ -1,7 +1,7 @@
 <template>
     <div class="select" v-bind:style="isLong ? 'width: 408px' : 'width: 235px; text-transform: uppercase;'">
         <div class="select__title">
-            <span v-if="isLong" class="selected" style="font-weight: 400; color: #999999">{{ category }}</span>
+            <span v-if="isLong" class="selected" style="font-weight: 400">{{ category }}</span>
             <span v-else class="selected">Все</span>
             <div class="select__icon"></div>
         </div>

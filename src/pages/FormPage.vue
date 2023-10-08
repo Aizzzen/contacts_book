@@ -18,8 +18,9 @@
                             placeholder='Например "Андрей"...'
                             :style="errors.fullName ? 'border-color: rgba(235, 87, 87, 1); --placeholder-color: rgba(235, 87, 87, 1)' : ''"
                         />
-                        <div class="form__validate">
+                        <div v-if="errors.fullName" class="form__validate">
                             <span class="form__validate-msg">
+                                <div class="form__validate-msg-icon"/>
                             {{ errors.fullName }}
                         </span>
                         </div>
@@ -33,11 +34,14 @@
                             name="phone"
                             rules="required"
                             v-model.trim="formData.phone"
-                            type="text"
+                            type="tel"
+                            placeholder="+7(___)-___-__-__"
                             :style="errors.phone ? 'border-color: rgba(235, 87, 87, 1); --placeholder-color: rgba(235, 87, 87, 1)' : ''"
+                            maxlength="12"
                         />
-                        <div class="form__validate">
+                        <div v-if="errors.phone" class="form__validate">
                             <span class="form__validate-msg">
+                                <div class="form__validate-msg-icon"/>
                             {{ errors.phone }}
                         </span>
                         </div>
@@ -55,8 +59,9 @@
                             placeholder="Например pochta@domain.ru"
                             :style="errors.email ? 'border-color: rgba(235, 87, 87, 1); --placeholder-color: rgba(235, 87, 87, 1)' : ''"
                         />
-                        <div class="form__validate">
+                        <div v-if="errors.email" class="form__validate">
                             <span class="form__validate-msg">
+                                <div class="form__validate-msg-icon"/>
                             {{ errors.email }}
                         </span>
                         </div>
@@ -72,13 +77,13 @@
                 </div>
                 <button class="form__button" type="submit">Сохранить</button>
             </Form>
+            <div class="iconsss"></div>
         </div>
     </section>
 </template>
 
 <script>
 import {mapMutations} from "vuex";
-// import {mapGetters, mapMutations} from "vuex";
 import AppHeader from "@/components/Header.vue";
 import CustomSelect from "@/components/CustomSelect.vue";
 import {Form, Field} from "vee-validate";
@@ -101,12 +106,6 @@ export default {
             }
         }
     },
-    // delete
-    // computed: {
-    //     ...mapGetters([
-    //         "CONTACTS"
-    //     ])
-    // },
     methods: {
         ...mapMutations([
             "ADD_CONTACT_DATA"
@@ -121,16 +120,17 @@ export default {
 
             return dd + '.' + mm + '.' + yy;
         },
-        async handleSubmit(event) {
-            event.preventDefault()
+        formatPhoneNumber(phoneNumber) {
+            return `${phoneNumber.slice(0, 2)}(${phoneNumber.slice(2, 5)})${phoneNumber.slice(5, 8)}-${phoneNumber.slice(8, 10)}-${phoneNumber.slice(10, 12)}`
+        },
+        async handleSubmit() {
             const newContact = {
                 id: Math.floor(Math.random() * 100000),
                 ...this.formData,
+                phone: this.formatPhoneNumber(this.formData.phone),
                 created_at: this.formatDate(new Date())
             }
             this.ADD_CONTACT_DATA(newContact)
-            // console.log(this.CONTACTS)
-            event.target.reset();
             this.$router.push("/");
         },
         updateCategory(newName) {
@@ -226,6 +226,7 @@ export default {
         background: rgba(255, 199, 0, 1);
         border: none;
         outline: none;
+        cursor: pointer;
 
         font-size: 14px;
         font-weight: 700;
@@ -268,6 +269,13 @@ export default {
             font-weight: 400;
             line-height: 16px;
             letter-spacing: 0em;
+
+            &-icon {
+                content: url("../assets/input-error-icon.png");
+                position: absolute;
+                bottom: 28px;
+                right: 10px;
+            }
         }
     }
 }
