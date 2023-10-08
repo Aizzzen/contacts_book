@@ -70,11 +70,6 @@ export default {
       box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.1);
     }
 
-    &:active {
-      background: #2F80ED;
-      color: #EAF2FD;
-    }
-
     &:before {
       content: url("../assets/plus-icon.png");
       width: 16px;

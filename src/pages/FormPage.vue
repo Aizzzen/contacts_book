@@ -69,11 +69,21 @@
                 </div>
                 <div class="form__input">
                     <label for="input">Категория</label>
-                    <custom-select
-                            :isLong="true"
+                    <div>
+                        <custom-select
                             :category="formData.category"
+                            :isLong="true"
+                            :isEmpty="isEmpty"
+                            @not-empty="isNotEmpty"
                             @update-category="updateCategory"
-                    />
+                        />
+                        <div v-if="isEmpty" class="form__validate" style="top: 5px">
+                            <span class="form__validate-msg">
+                                <div class="form__validate-msg-icon"/>
+                            Поле не может быть пустым
+                        </span>
+                        </div>
+                    </div>
                 </div>
                 <button class="form__button" type="submit">Сохранить</button>
             </Form>
@@ -103,7 +113,8 @@ export default {
                 phone: "",
                 email: "",
                 category: "Не выбрано",
-            }
+            },
+            isEmpty: false
         }
     },
     methods: {
@@ -124,17 +135,24 @@ export default {
             return `${phoneNumber.slice(0, 2)}(${phoneNumber.slice(2, 5)})${phoneNumber.slice(5, 8)}-${phoneNumber.slice(8, 10)}-${phoneNumber.slice(10, 12)}`
         },
         async handleSubmit() {
-            const newContact = {
-                id: Math.floor(Math.random() * 100000),
-                ...this.formData,
-                phone: this.formatPhoneNumber(this.formData.phone),
-                created_at: this.formatDate(new Date())
+            if (this.formData.category === "Не выбрано") {
+                this.isEmpty = true
+            } else {
+                const newContact = {
+                    id: Math.floor(Math.random() * 100000),
+                    ...this.formData,
+                    phone: this.formatPhoneNumber(this.formData.phone),
+                    created_at: this.formatDate(new Date())
+                }
+                this.ADD_CONTACT_DATA(newContact)
+                this.$router.push("/");
             }
-            this.ADD_CONTACT_DATA(newContact)
-            this.$router.push("/");
         },
         updateCategory(newName) {
             this.formData.category = newName;
+        },
+        isNotEmpty(newValue) {
+            this.isEmpty = newValue;
         }
     },
 }
