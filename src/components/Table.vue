@@ -80,6 +80,10 @@ export default {
                 }
             }
         }
+
+        &-body {
+            cursor: pointer;
+        }
     }
 }
 

@@ -4,19 +4,63 @@
     />
     <section class="form__page">
         <div class="form__block">
-            <form @submit.prevent="handleSubmit" action="">
+            <Form v-slot="{ errors }" @submit="handleSubmit">
                 <div class="form__name">Новый контакт</div>
                 <div class="form__input">
-                    <label for="input">Имя</label>
-                    <input v-model.trim="formData.fullName" type="text" placeholder='Например "Андрей"...' />
+                    <label for="fullName">Имя</label>
+                    <div>
+                        <Field
+                            as="input"
+                            name="fullName"
+                            rules="required|min:3"
+                            v-model.trim="formData.fullName"
+                            type="text"
+                            placeholder='Например "Андрей"...'
+                            :style="errors.fullName ? 'border-color: rgba(235, 87, 87, 1); --placeholder-color: rgba(235, 87, 87, 1)' : ''"
+                        />
+                        <div class="form__validate">
+                            <span class="form__validate-msg">
+                            {{ errors.fullName }}
+                        </span>
+                        </div>
+                    </div>
                 </div>
                 <div class="form__input">
-                    <label for="input">Телефон</label>
-                    <input v-model.trim="formData.phone" type="text"/>
+                    <label for="phone">Телефон</label>
+                    <div>
+                        <Field
+                            as="input"
+                            name="phone"
+                            rules="required"
+                            v-model.trim="formData.phone"
+                            type="text"
+                            :style="errors.phone ? 'border-color: rgba(235, 87, 87, 1); --placeholder-color: rgba(235, 87, 87, 1)' : ''"
+                        />
+                        <div class="form__validate">
+                            <span class="form__validate-msg">
+                            {{ errors.phone }}
+                        </span>
+                        </div>
+                    </div>
                 </div>
                 <div class="form__input">
-                    <label for="input">E-mail</label>
-                    <input v-model.trim="formData.email" type="email" placeholder="Например pochta@domain.ru"/>
+                    <label for="email">E-mail</label>
+                    <div>
+                        <Field
+                            as="input"
+                            name="email"
+                            rules="required|email"
+                            v-model.trim="formData.email"
+                            type="email"
+                            placeholder="Например pochta@domain.ru"
+                            :style="errors.email ? 'border-color: rgba(235, 87, 87, 1); --placeholder-color: rgba(235, 87, 87, 1)' : ''"
+                        />
+                        <div class="form__validate">
+                            <span class="form__validate-msg">
+                            {{ errors.email }}
+                        </span>
+                        </div>
+                    </div>
                 </div>
                 <div class="form__input">
                     <label for="input">Категория</label>
@@ -26,22 +70,26 @@
                             @update-category="updateCategory"
                     />
                 </div>
-
                 <button class="form__button" type="submit">Сохранить</button>
-            </form>
+            </Form>
         </div>
     </section>
 </template>
 
 <script>
-import CustomSelect from "@/components/CustomSelect.vue";
-import {mapGetters, mapMutations} from "vuex";
+import {mapMutations} from "vuex";
+// import {mapGetters, mapMutations} from "vuex";
 import AppHeader from "@/components/Header.vue";
+import CustomSelect from "@/components/CustomSelect.vue";
+import {Form, Field} from "vee-validate";
+
 export default {
     name: 'form-page',
     components: {
         AppHeader,
         CustomSelect,
+        Form,
+        Field
     },
     data() {
         return {
@@ -54,29 +102,36 @@ export default {
         }
     },
     // delete
-    computed: {
-        ...mapGetters([
-            "CONTACTS"
-        ])
-    },
+    // computed: {
+    //     ...mapGetters([
+    //         "CONTACTS"
+    //     ])
+    // },
     methods: {
         ...mapMutations([
             "ADD_CONTACT_DATA"
         ]),
-        handleSubmit(event) {
-            this.ADD_CONTACT_DATA({
+        formatDate(date) {
+            let dd = date.getDate();
+            if (dd < 10) dd = '0' + dd;
+            let mm = date.getMonth() + 1;
+            if (mm < 10) mm = '0' + mm;
+            let yy = date.getFullYear() % 100;
+            if (yy < 10) yy = '0' + yy;
+
+            return dd + '.' + mm + '.' + yy;
+        },
+        async handleSubmit(event) {
+            event.preventDefault()
+            const newContact = {
                 id: Math.floor(Math.random() * 100000),
                 ...this.formData,
-                created_at: new Date().toLocaleString("ru", {
-                    year: 'numeric',
-                    month: 'numeric',
-                    day: 'numeric',
-                    timezone: 'UTC'
-                })
-            })
-            console.log(this.CONTACTS)
-            this.$router.push("/");
+                created_at: this.formatDate(new Date())
+            }
+            this.ADD_CONTACT_DATA(newContact)
+            // console.log(this.CONTACTS)
             event.target.reset();
+            this.$router.push("/");
         },
         updateCategory(newName) {
             this.formData.category = newName;
@@ -146,6 +201,12 @@ export default {
             outline: none;
             border: 1px solid rgba(221, 221, 221, 1);
 
+            --placeholder-color: #999999;
+
+            &::placeholder {
+                color: var(--placeholder-color);
+            }
+
             &:hover, &:focus {
                 border: 1px solid rgba(47, 128, 237, 1);
             }
@@ -191,6 +252,22 @@ export default {
 
         &:active {
             background: rgba(243, 196, 30, 1);
+        }
+    }
+
+    &__validate {
+        position: relative;
+
+        &-msg {
+            position: absolute;
+            display: block;
+            right: 0;
+            color: rgba(235, 87, 87, 1);
+
+            font-size: 10px;
+            font-weight: 400;
+            line-height: 16px;
+            letter-spacing: 0em;
         }
     }
 }

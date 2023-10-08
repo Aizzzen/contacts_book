@@ -61,7 +61,7 @@ export default {
         &-title {
             display: flex;
             margin: 0 auto;
-            align-items: center;
+            padding-top: 8px;
             font-size: 20px;
             font-weight: 700;
             line-height: 24px;
