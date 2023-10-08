@@ -1,5 +1,6 @@
 <template>
     <div class="contacts__table-row">
+        <div class="row__icon">{{ row_data.fullName[0] }}</div>
         <div class="row__fullName">{{ row_data.fullName }}</div>
         <div class="row__phone">{{ row_data.phone }}</div>
         <div class="row__email">{{ row_data.email }}</div>
@@ -35,24 +36,26 @@ export default {
     margin-top: 25px;
 
     & div {
-        height: 48px;
+        &:not(:first-child) {
+            height: 48px;
+        }
 
-        &:nth-child(1) {
+        &:nth-child(2) {
             min-width: 296px;
             width: 100%;
         }
 
-        &:nth-child(2) {
+        &:nth-child(3) {
             min-width: 112px;
             width: 100%;
         }
 
-        &:nth-child(3) {
+        &:nth-child(4) {
             min-width: 208px;
             width: 100%;
         }
 
-        &:nth-child(4) {
+        &:nth-child(5) {
             min-width: 112px;
             text-align: right;
             width: 100%;
@@ -62,6 +65,21 @@ export default {
     &:not(:last-child) {
         border-bottom: 1px solid #EAF2FD;
     }
+}
+
+.row__icon {
+    width: 60px;
+    height: 24px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 15px;
+    letter-spacing: 0em;
+    border-radius: 56px;
+    background-color: rgba(255, 199, 0, 1);
+    color: rgba(84, 84, 84, 1);
+
+    padding: 4px 7px 7px 8.5px;
+    margin-right: 8px;
 }
 
 </style>
