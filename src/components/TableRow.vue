@@ -41,7 +41,7 @@ export default {
         }
 
         &:nth-child(2) {
-            min-width: 296px;
+            min-width: 264px;
             width: 100%;
         }
 
