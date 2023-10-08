@@ -41,7 +41,7 @@ export default {
         }
 
         &:nth-child(2) {
-            min-width: 264px;
+            min-width: 261px;
             width: 100%;
         }
 
@@ -68,7 +68,7 @@ export default {
 }
 
 .row__icon {
-    width: 60px;
+    width: 48px;
     height: 24px;
     font-size: 12px;
     font-weight: 700;
@@ -78,7 +78,7 @@ export default {
     background-color: rgba(255, 199, 0, 1);
     color: rgba(84, 84, 84, 1);
 
-    padding: 4px 7px 7px 8.5px;
+    padding: 4px 8.5px 8.5px 8.5px;
     margin-right: 8px;
 }
 

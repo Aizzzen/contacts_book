@@ -87,7 +87,6 @@
                 </div>
                 <button class="form__button" type="submit">Сохранить</button>
             </Form>
-            <div class="iconsss"></div>
         </div>
     </section>
 </template>
@@ -97,6 +96,7 @@ import {mapMutations} from "vuex";
 import AppHeader from "@/components/Header.vue";
 import CustomSelect from "@/components/CustomSelect.vue";
 import {Form, Field} from "vee-validate";
+import {showToast} from "@/customToast";
 
 export default {
     name: 'form-page',
@@ -146,6 +146,7 @@ export default {
                 }
                 this.ADD_CONTACT_DATA(newContact)
                 this.$router.push("/");
+                showToast('Контакт успешно создан')
             }
         },
         updateCategory(newName) {
