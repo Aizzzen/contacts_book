@@ -10,7 +10,7 @@
             <li @click="changeCategory('Коллега')">Коллега</li>
         </ul>
         <ul v-else class="select__options">
-            <li class="select__options_active">Все</li>
+            <li @click="sortByCategory('Все')" class="select__options_active">Все</li>
             <li @click="sortByCategory('Родственник')">Родственники</li>
             <li @click="sortByCategory('Коллега')">Коллеги</li>
         </ul>
@@ -42,7 +42,9 @@ export default {
             this.$emit('not-empty', false)
             this.$emit('update-category', name)
         },
-        // sortByCategory(categoryName) {}
+        sortByCategory(categoryName) {
+            this.$emit('sort-by-category', categoryName)
+        }
     },
     mounted() {
         const select = document.querySelectorAll(".select");

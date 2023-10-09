@@ -2,7 +2,10 @@
     <app-header/>
     <section class="subheader">
         <div class="container" style="display: flex; justify-content: space-between">
-            <custom-select :isLong="false" />
+            <custom-select
+                :isLong="false"
+                @sort-by-category="sortByCategory"
+            />
             <router-link to="/form">
                 <button class="subheader__button">Добавить контакт</button>
             </router-link>
@@ -11,7 +14,7 @@
     <section class="contacts">
         <div class="container">
             <contacts-table
-                    :contacts_data="CONTACTS"
+                    :contacts_data="category ? sortedContacts : CONTACTS"
             />
         </div>
     </section>
@@ -28,6 +31,26 @@ export default {
     components: {
         AppHeader,
         ContactsTable, CustomSelect
+    },
+    data() {
+        return {
+            category: "",
+            sortedContacts: []
+        }
+    },
+    methods: {
+        sortByCategory(categoryName) {
+            if (categoryName === "Все") {
+                this.category = ""
+            } else {
+                this.category = categoryName;
+                this.sortedContacts = this.CONTACTS.filter(item => {
+                    if (item.category === this.category) {
+                        return item
+                    }
+                })
+            }
+        },
     },
     computed: {
         ...mapGetters([
