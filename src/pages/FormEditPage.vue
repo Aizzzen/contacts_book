@@ -102,7 +102,7 @@
 </template>
 
 <script>
-import {mapMutations, mapGetters} from "vuex";
+import {mapGetters, mapActions} from "vuex";
 import AppHeader from "@/components/Header.vue";
 import CustomSelect from "@/components/CustomSelect.vue";
 import {Form, Field} from "vee-validate";
@@ -143,8 +143,8 @@ export default {
         this.formData.created_at = dataFromStore.created_at;
     },
     methods: {
-        ...mapMutations([
-            "UPDATE_CONTACT_DATA",
+        ...mapActions([
+            "UPDATE_CONTACT",
             "DELETE_CONTACT"
         ]),
         ...mapGetters([
@@ -159,7 +159,7 @@ export default {
 
                     phone: formatPhoneNumber(this.formData.phone),
                 }
-                this.UPDATE_CONTACT_DATA(updatedContact)
+                this.UPDATE_CONTACT(updatedContact)
                 this.$router.push("/");
                 showToast('Контакт успешно изменён')
             }

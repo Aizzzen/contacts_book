@@ -114,6 +114,7 @@ export default {
         &-quit {
             display: flex;
             align-items: center;
+            padding-top: 3px;
         }
     }
 }

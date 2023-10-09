@@ -92,7 +92,7 @@
 </template>
 
 <script>
-import {mapMutations} from "vuex";
+import {mapActions} from "vuex";
 import AppHeader from "@/components/Header.vue";
 import CustomSelect from "@/components/CustomSelect.vue";
 import {Form, Field} from "vee-validate";
@@ -122,8 +122,8 @@ export default {
         }
     },
     methods: {
-        ...mapMutations([
-            "ADD_CONTACT"
+        ...mapActions([
+            "CREATE_CONTACT"
         ]),
         async handleSubmit() {
             if (this.formData.category === "Не выбрано") {
@@ -135,7 +135,7 @@ export default {
                     phone: formatPhoneNumber(this.formData.phone),
                     created_at: formatDate(new Date())
                 }
-                this.ADD_CONTACT(newContact)
+                await this.CREATE_CONTACT(newContact)
                 this.$router.push("/");
                 showToast('Контакт успешно создан')
             }

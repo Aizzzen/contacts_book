@@ -11,8 +11,8 @@
         </ul>
         <ul v-else class="select__options">
             <li class="select__options_active">Все</li>
-            <li>Родственники</li>
-            <li>Коллеги</li>
+            <li @click="sortByCategory('Родственник')">Родственники</li>
+            <li @click="sortByCategory('Коллега')">Коллеги</li>
         </ul>
     </div>
 </template>
@@ -41,7 +41,8 @@ export default {
         changeCategory(name) {
             this.$emit('not-empty', false)
             this.$emit('update-category', name)
-        }
+        },
+        // sortByCategory(categoryName) {}
     },
     mounted() {
         const select = document.querySelectorAll(".select");
