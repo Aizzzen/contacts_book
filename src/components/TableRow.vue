@@ -34,8 +34,6 @@ export default {
     font-size: 14px;
     font-weight: 400;
     line-height: 22px;
-    letter-spacing: 0em;
-    text-align: left;
     color: #545454;
 
     margin-top: 25px;
@@ -73,6 +71,7 @@ export default {
 }
 
 .row__icon {
+    position: relative;
     width: 24px;
     height: 24px;
     font-size: 12px;
@@ -80,10 +79,7 @@ export default {
     line-height: 9px;
     border-radius: 20px;
     background-color: rgba(255, 199, 0, 1);
-
-    padding: 7px;
-    text-align: center;
-    align-items: center;
+    padding: 7px 8px 8px;
     margin-right: 8px;
 }
 

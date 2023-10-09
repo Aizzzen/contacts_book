@@ -18,6 +18,10 @@ export default createStore({
     },
     ADD_CONTACT_DATA: (state, data) => {
       state.contacts.push(data)
+    },
+    UPDATE_CONTACT_DATA: (state, updated_contact) => {
+      const index = state.contacts.findIndex((item) => item.id === updated_contact.id);
+      state.contacts[index] = updated_contact;
     }
   },
   actions: {

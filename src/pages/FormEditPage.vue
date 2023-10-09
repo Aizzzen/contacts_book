@@ -89,11 +89,10 @@
                 <div class="form__input" style="justify-content: normal">
                     <label for="date">Создан</label>
                     <div class="form__input-date">
-                        {{ formData.date }}
+                        {{ formData.created_at }}
                     </div>
                 </div>
-
-                <button class="form__button" type="submit">Сохранить</button>
+                <form-save-button/>
             </Form>
         </div>
     </section>
@@ -106,12 +105,15 @@ import CustomSelect from "@/components/CustomSelect.vue";
 import {Form, Field} from "vee-validate";
 import {showToast} from "@/customToast";
 import store from "@/store";
+import FormSaveButton from "@/components/FormSaveButton.vue";
+import {formatPhoneNumber} from "@/utils/formatPhoneNumber";
 // import {formatPhoneNumber} from "@/utils/formatPhoneNumber";
 // import {formatDate} from "@/utils/formatDate";
 
 export default {
     name: 'form-edit-page',
     components: {
+        FormSaveButton,
         AppHeader,
         CustomSelect,
         Form,
@@ -120,27 +122,28 @@ export default {
     data() {
         return {
             formData: {
+                id: "",
                 fullName: "",
                 phone: "",
                 email: "",
                 category: "",
-                date: "",
+                created_at: "",
             },
             isEmpty: false
         }
     },
     mounted() {
         const dataFromStore = store.getters.CONTACT_BY_ID(Number(this.$route.params.id));
-        console.log(dataFromStore)
+        this.formData.id = dataFromStore.id;
         this.formData.fullName = dataFromStore.fullName;
-        this.formData.phone = dataFromStore.phone;
+        this.formData.phone = formatPhoneNumber(dataFromStore.phone);
         this.formData.email = dataFromStore.email;
         this.formData.category = dataFromStore.category;
-        this.formData.date = dataFromStore.created_at;
+        this.formData.created_at = dataFromStore.created_at;
     },
     methods: {
         ...mapMutations([
-            "ADD_CONTACT_DATA"
+            "UPDATE_CONTACT_DATA"
         ]),
         ...mapGetters([
             "CONTACT_BY_ID"
@@ -149,14 +152,13 @@ export default {
             if (this.formData.category === "Не выбрано") {
                 this.isEmpty = true
             } else {
-                // const newContact = {
-                //     id: Math.floor(Math.random() * 100000),
-                //     ...this.formData,
-                //     phone: formatPhoneNumber(this.formData.phone),
-                //     created_at: formatDate(new Date())
-                // }
-                // this.ADD_CONTACT_DATA(newContact)
-                // this.$router.push("/");
+                const updatedContact = {
+                    ...this.formData,
+
+                    phone: formatPhoneNumber(this.formData.phone),
+                }
+                this.UPDATE_CONTACT_DATA(updatedContact)
+                this.$router.push("/");
                 showToast('Контакт успешно изменён')
             }
         },
@@ -245,41 +247,6 @@ export default {
             padding: 11px;
             position: relative;
             left: 117px;
-        }
-    }
-
-    &__button {
-        width: 136px;
-        height: 40px;
-        padding: 12px 16px 12px 16px;
-        border-radius: 4px;
-        margin-top: 24px;
-        background: rgba(255, 199, 0, 1);
-        border: none;
-        outline: none;
-        cursor: pointer;
-
-        font-weight: 700;
-        line-height: 17px;
-        text-transform: uppercase;
-
-        overflow: hidden;
-        position: relative;
-        left: 168px;
-
-        &:before {
-            content: url("../assets/save-icon.png");
-            width: 16px;
-            height: 16px;
-            margin-right: 5px;
-        }
-
-        &:hover {
-            background: rgba(255, 216, 76, 1);
-        }
-
-        &:active {
-            background: rgba(243, 196, 30, 1);
         }
     }
 
