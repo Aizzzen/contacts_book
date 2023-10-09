@@ -24,6 +24,12 @@ export default {
   padding: 0;
   margin: 0;
   font-family: "Proxima Nova", system-ui;
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0em;
+  color: rgba(84, 84, 84, 1);
 }
 
 *,
@@ -45,19 +51,18 @@ export default {
   box-shadow: 0 0 16px 0 rgba(176, 197, 222, 0.5);
   border-radius: 4px;
   gap: 12px;
-
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 22px;
-  letter-spacing: 0em;
-  color: rgba(84, 84, 84, 1);
+  cursor: default;
 
   &:before {
     content: url("./assets/toast-success.png");
     position: relative;
-    top: 1px;
+    top: 2px;
     margin-right: 4px;
   }
+}
+
+a {
+  text-decoration: none;
 }
 
 </style>

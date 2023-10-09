@@ -1,5 +1,5 @@
 <template>
-    <div class="contacts__table-row">
+    <div @click="handleOpenContact(row_data.id)" class="contacts__table-row">
         <div class="row__icon">{{ row_data.fullName[0] }}</div>
         <div class="row__fullName">{{ row_data.fullName }}</div>
         <div class="row__phone">{{ row_data.phone }}</div>
@@ -17,6 +17,11 @@ export default {
             default: () => {
                 return {}
             }
+        }
+    },
+    methods: {
+        handleOpenContact(id) {
+            this.$router.push(`/form/${id}`)
         }
     }
 }
@@ -41,7 +46,7 @@ export default {
         }
 
         &:nth-child(2) {
-            min-width: 261px;
+            min-width: 264px;
             width: 100%;
         }
 
@@ -68,17 +73,17 @@ export default {
 }
 
 .row__icon {
-    width: 48px;
+    width: 24px;
     height: 24px;
     font-size: 12px;
     font-weight: 700;
-    line-height: 15px;
-    letter-spacing: 0em;
-    border-radius: 56px;
+    line-height: 9px;
+    border-radius: 20px;
     background-color: rgba(255, 199, 0, 1);
-    color: rgba(84, 84, 84, 1);
 
-    padding: 4px 8.5px 8.5px 8.5px;
+    padding: 7px;
+    text-align: center;
+    align-items: center;
     margin-right: 8px;
 }
 

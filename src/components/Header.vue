@@ -1,6 +1,10 @@
 <template>
     <header v-if="isFormPage" class="header">
-        <div class="header__form-title">Добавить контакт</div>
+        <div v-if="fullName" class="header__form-fullName">
+            <div class="header__form-fullName_first-letter">{{ fullName[0] }}</div>
+            {{ fullName }}
+        </div>
+        <div v-else class="header__form-title">Добавить контакт</div>
         <div class="header__form-quit">
             <router-link to="/">
                 <img src="../assets/form-quit-icon.png" alt="">
@@ -23,6 +27,12 @@ export default {
             type: Boolean,
             default: () => {
                 return false;
+            }
+        },
+        fullName: {
+            type: String,
+            default: () => {
+                return "";
             }
         }
     }
@@ -50,8 +60,6 @@ export default {
         font-size: 18px;
         font-weight: 700;
         line-height: 22px;
-        letter-spacing: 0em;
-        text-align: left;
         text-transform: uppercase;
         color: #E0E0E0;
         padding-top: 12px;
@@ -65,7 +73,6 @@ export default {
             font-size: 20px;
             font-weight: 700;
             line-height: 24px;
-            letter-spacing: 0em;
             color: rgba(221, 221, 221, 1);
 
             &:before {
@@ -76,6 +83,32 @@ export default {
                 position: relative;
                 right: 6px;
                 top: 3px;
+            }
+        }
+
+        &-fullName {
+            display: flex;
+            margin: 0 auto;
+            padding-top: 8px;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 24px;
+            color: rgba(221, 221, 221, 1);
+
+            &_first-letter {
+                position: relative;
+                width: 24px;
+                height: 24px;
+                font-size: 12px;
+                font-weight: 700;
+                line-height: 9px;
+                border-radius: 20px;
+                background-color: rgba(255, 199, 0, 1);
+                padding: 7px;
+                text-align: center;
+                align-items: center;
+                margin-top: 2px;
+                margin-right: 8px;
             }
         }
 

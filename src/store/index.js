@@ -5,8 +5,11 @@ export default createStore({
     contacts: []
   },
   getters: {
-    CONTACTS(state) {
+    CONTACTS:(state) => {
       return state.contacts;
+    },
+    CONTACT_BY_ID:(state) => (contact_id) => {
+      return state.contacts.find(item => item.id === contact_id);
     }
   },
   mutations: {

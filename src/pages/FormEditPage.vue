@@ -1,11 +1,12 @@
 <template>
     <app-header
         :isFormPage="true"
+        :fullName="formData.fullName"
     />
     <section class="form__page">
         <div class="form__block">
             <Form v-slot="{ errors }" @submit="handleSubmit">
-                <div class="form__name">Новый контакт</div>
+                <div class="form__name">Контакт</div>
                 <div class="form__input">
                     <label for="fullName">Имя</label>
                     <div>
@@ -69,7 +70,7 @@
                 </div>
                 <div class="form__input">
                     <label for="input">Категория</label>
-                    <div>
+                    <div style="margin-top: -7px; margin-bottom: 7px">
                         <custom-select
                             :category="formData.category"
                             :isLong="true"
@@ -85,6 +86,13 @@
                         </div>
                     </div>
                 </div>
+                <div class="form__input" style="justify-content: normal">
+                    <label for="date">Создан</label>
+                    <div class="form__input-date">
+                        {{ formData.date }}
+                    </div>
+                </div>
+
                 <button class="form__button" type="submit">Сохранить</button>
             </Form>
         </div>
@@ -92,16 +100,17 @@
 </template>
 
 <script>
-import {mapMutations} from "vuex";
+import {mapMutations, mapGetters} from "vuex";
 import AppHeader from "@/components/Header.vue";
 import CustomSelect from "@/components/CustomSelect.vue";
 import {Form, Field} from "vee-validate";
 import {showToast} from "@/customToast";
-import {formatPhoneNumber} from "@/utils/formatPhoneNumber";
-import {formatDate} from "@/utils/formatDate";
+import store from "@/store";
+// import {formatPhoneNumber} from "@/utils/formatPhoneNumber";
+// import {formatDate} from "@/utils/formatDate";
 
 export default {
-    name: 'form-page',
+    name: 'form-edit-page',
     components: {
         AppHeader,
         CustomSelect,
@@ -114,28 +123,41 @@ export default {
                 fullName: "",
                 phone: "",
                 email: "",
-                category: "Не выбрано",
+                category: "",
+                date: "",
             },
             isEmpty: false
         }
+    },
+    mounted() {
+        const dataFromStore = store.getters.CONTACT_BY_ID(Number(this.$route.params.id));
+        console.log(dataFromStore)
+        this.formData.fullName = dataFromStore.fullName;
+        this.formData.phone = dataFromStore.phone;
+        this.formData.email = dataFromStore.email;
+        this.formData.category = dataFromStore.category;
+        this.formData.date = dataFromStore.created_at;
     },
     methods: {
         ...mapMutations([
             "ADD_CONTACT_DATA"
         ]),
+        ...mapGetters([
+            "CONTACT_BY_ID"
+        ]),
         async handleSubmit() {
             if (this.formData.category === "Не выбрано") {
                 this.isEmpty = true
             } else {
-                const newContact = {
-                    id: Math.floor(Math.random() * 100000),
-                    ...this.formData,
-                    phone: formatPhoneNumber(this.formData.phone),
-                    created_at: formatDate(new Date())
-                }
-                this.ADD_CONTACT_DATA(newContact)
-                this.$router.push("/");
-                showToast('Контакт успешно создан')
+                // const newContact = {
+                //     id: Math.floor(Math.random() * 100000),
+                //     ...this.formData,
+                //     phone: formatPhoneNumber(this.formData.phone),
+                //     created_at: formatDate(new Date())
+                // }
+                // this.ADD_CONTACT_DATA(newContact)
+                // this.$router.push("/");
+                showToast('Контакт успешно изменён')
             }
         },
         updateCategory(newName) {
@@ -166,7 +188,7 @@ export default {
 
     &__block {
         width: 704px;
-        height: 455px;
+        height: 511px;
         display: flex;
         margin: 0 auto;
         gap: 32px;
@@ -216,6 +238,14 @@ export default {
         &:not(:last-child) {
             margin-bottom: 16px;
         }
+
+        &-date {
+            cursor: default;
+            height: 40px;
+            padding: 11px;
+            position: relative;
+            left: 117px;
+        }
     }
 
     &__button {
@@ -228,9 +258,11 @@ export default {
         border: none;
         outline: none;
         cursor: pointer;
+
         font-weight: 700;
         line-height: 17px;
         text-transform: uppercase;
+
         overflow: hidden;
         position: relative;
         left: 168px;

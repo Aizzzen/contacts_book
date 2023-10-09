@@ -2,7 +2,7 @@
     <div class="select" :style="isLong ? 'width: 408px' : 'width: 235px; text-transform: uppercase;'">
         <div class="select__title" :style="isEmpty && 'border-color: rgba(235, 87, 87, 1); color: rgba(235, 87, 87, 1);'">
             <span v-if="isLong" class="selected" style="font-weight: 400">{{ category }}</span>
-            <span v-else class="selected">Все</span>
+            <span v-else class="selected" style="font-weight: 700">Все</span>
             <div class="select__icon"></div>
         </div>
         <ul v-if="isLong" class="select__options">

@@ -49,15 +49,14 @@ export default {
             padding-top: 8px;
             padding-bottom: 8px;
             text-transform: uppercase;
-            font-size: 10px;
-            font-weight: 400;
-            line-height: 16px;
-            letter-spacing: 0em;
-            text-align: left;
-            color: #B5B5B5;
+
             margin-bottom: 10px;
 
             & p {
+                font-size: 10px;
+                line-height: 16px;
+                color: #B5B5B5;
+
                 &:nth-child(1) {
                     min-width: 296px;
                     width: 100%;
