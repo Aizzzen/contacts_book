@@ -92,7 +92,10 @@
                         {{ formData.created_at }}
                     </div>
                 </div>
-                <form-save-button/>
+                <div>
+                    <form-save-button/>
+                    <button type="button" class="form__button_delete" @click="deleteContact(formData.id)">Удалить контакт</button>
+                </div>
             </Form>
         </div>
     </section>
@@ -107,8 +110,6 @@ import {showToast} from "@/customToast";
 import store from "@/store";
 import FormSaveButton from "@/components/FormSaveButton.vue";
 import {formatPhoneNumber} from "@/utils/formatPhoneNumber";
-// import {formatPhoneNumber} from "@/utils/formatPhoneNumber";
-// import {formatDate} from "@/utils/formatDate";
 
 export default {
     name: 'form-edit-page',
@@ -143,7 +144,8 @@ export default {
     },
     methods: {
         ...mapMutations([
-            "UPDATE_CONTACT_DATA"
+            "UPDATE_CONTACT_DATA",
+            "DELETE_CONTACT"
         ]),
         ...mapGetters([
             "CONTACT_BY_ID"
@@ -167,6 +169,11 @@ export default {
         },
         isNotEmpty(newValue) {
             this.isEmpty = newValue;
+        },
+        deleteContact(contactId) {
+            this.DELETE_CONTACT(contactId)
+            this.$router.push("/");
+            showToast('Контакт удалён')
         }
     },
 }
@@ -267,6 +274,22 @@ export default {
                 bottom: 28px;
                 right: 10px;
             }
+        }
+    }
+
+    &__button_delete {
+        position: relative;
+        left: 200px;
+        border: none;
+        background: none;
+        color: rgba(47, 128, 237, 1);
+        font-size: 12px;
+        line-height: 15px;
+        cursor: pointer;
+
+        &:before {
+            content: url("../assets/delete-icon.png");
+            margin-right: 4px;
         }
     }
 }

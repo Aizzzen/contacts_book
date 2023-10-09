@@ -123,7 +123,7 @@ export default {
     },
     methods: {
         ...mapMutations([
-            "ADD_CONTACT_DATA"
+            "ADD_CONTACT"
         ]),
         async handleSubmit() {
             if (this.formData.category === "Не выбрано") {
@@ -135,7 +135,7 @@ export default {
                     phone: formatPhoneNumber(this.formData.phone),
                     created_at: formatDate(new Date())
                 }
-                this.ADD_CONTACT_DATA(newContact)
+                this.ADD_CONTACT(newContact)
                 this.$router.push("/");
                 showToast('Контакт успешно создан')
             }
