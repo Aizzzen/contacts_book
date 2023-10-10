@@ -26,14 +26,15 @@ export default {
     overflow: hidden;
     position: relative;
     left: 168px;
-
     @media screen and (max-width: 768px) {
         font-size: 12px;
         line-height: 14px;
     }
-
     @media screen and (max-width: 576px) {
         margin-top: 12px !important;
+    }
+    @media screen and (max-width: 376px) {
+        left: 84px;
     }
 
     &:before {

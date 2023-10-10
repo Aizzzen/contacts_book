@@ -186,11 +186,14 @@ export default {
         position: relative;
         top: 20px;
         padding: 64px;
-
         @media screen and (max-width: 576px) {
             width: 552px !important;
             height: 405px !important;
             padding: 48px !important;
+        }
+        @media screen and (max-width: 376px) {
+            width: 352px !important;
+            padding: 48px 20px 48px 20px !important;
         }
 
         & form {
@@ -201,14 +204,15 @@ export default {
 
     &__input {
         width: 576px;
-
-        @media screen and (max-width: 576px) {
-            width: 456px !important;
-        }
-
         display: flex;
         justify-content: space-between;
         align-items: center;
+        @media screen and (max-width: 576px) {
+            width: 456px !important;
+        }
+        @media screen and (max-width: 376px) {
+            width: 312px !important;
+        }
 
         & label {
             font-weight: 700;
@@ -222,19 +226,18 @@ export default {
             border-radius: 4px;
             outline: none;
             border: 1px solid rgba(221, 221, 221, 1);
-
             --placeholder-color: #999999;
-
             &::placeholder {
                 color: var(--placeholder-color);
             }
-
             &:hover, &:focus {
                 border: 1px solid rgba(47, 128, 237, 1);
             }
-
             @media screen and (max-width: 576px) {
                 width: 288px !important;
+            }
+            @media screen and (max-width: 376px) {
+                width: 228px !important;
             }
         }
 

@@ -174,9 +174,12 @@ export default {
 
 .isLong {
     width: 408px;
-
     @media screen and (max-width: 576px) {
         width: 288px !important;
+    }
+    @media screen and (max-width: 376px) {
+        width: 228px !important;
+        padding-top: 2px;
     }
 }
 

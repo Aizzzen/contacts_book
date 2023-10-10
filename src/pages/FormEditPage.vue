@@ -93,7 +93,7 @@
                     </div>
                 </div>
                 <div>
-                    <form-save-button/>
+                    <form-save-button :class="window.outerWidth <= 376 && 'left22'"/>
                     <button type="button" class="form__button_delete" @click="deleteContact(formData.id)">Удалить контакт</button>
                 </div>
             </Form>
@@ -215,11 +215,14 @@ export default {
         position: relative;
         top: 20px;
         padding: 64px;
-
         @media screen and (max-width: 576px) {
             width: 552px !important;
             height: 461px !important;
             padding: 48px !important;
+        }
+        @media screen and (max-width: 376px) {
+            width: 352px !important;
+            padding: 48px 20px 48px 20px !important;
         }
 
         & form {
@@ -230,14 +233,15 @@ export default {
 
     &__input {
         width: 576px;
-
-        @media screen and (max-width: 576px) {
-            width: 456px !important;
-        }
-
         display: flex;
         justify-content: space-between;
         align-items: center;
+        @media screen and (max-width: 576px) {
+            width: 456px !important;
+        }
+        @media screen and (max-width: 376px) {
+            width: 312px !important;
+        }
 
         & label {
             font-weight: 700;
@@ -261,9 +265,11 @@ export default {
             &:hover, &:focus {
                 border: 1px solid rgba(47, 128, 237, 1);
             }
-
             @media screen and (max-width: 576px) {
                 width: 288px !important;
+            }
+            @media screen and (max-width: 376px) {
+                width: 228px !important;
             }
         }
 
@@ -277,6 +283,9 @@ export default {
             padding: 11px;
             position: relative;
             left: 117px;
+            @media screen and (max-width: 376px) {
+                left: 39px;
+            }
         }
     }
 
@@ -314,7 +323,15 @@ export default {
             content: url("../assets/delete-icon.png");
             margin-right: 4px;
         }
+
+        @media screen and (max-width: 376px) {
+            left: 45px;
+        }
     }
+}
+
+.left22 {
+    left: 22px;
 }
 
 </style>
