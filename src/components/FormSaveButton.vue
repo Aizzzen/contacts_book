@@ -27,6 +27,15 @@ export default {
     position: relative;
     left: 168px;
 
+    @media screen and (max-width: 768px) {
+        font-size: 12px;
+        line-height: 14px;
+    }
+
+    @media screen and (max-width: 576px) {
+        margin-top: 12px !important;
+    }
+
     &:before {
         content: url("../assets/save-icon.png");
         width: 16px;

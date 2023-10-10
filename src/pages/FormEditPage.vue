@@ -4,7 +4,7 @@
         :fullName="formData.fullName"
     />
     <section class="form__page">
-        <div class="form__block">
+        <div class="form__block-edit">
             <Form v-slot="{ errors }" @submit="handleSubmit">
                 <div class="form__name">Контакт</div>
                 <div class="form__input">
@@ -188,14 +188,23 @@ export default {
         line-height: 39px;
         position: relative;
         bottom: 24px;
+
+        @media screen and (max-width: 768px) {
+            font-size: 24px;
+            line-height: 29px;
+        }
     }
 
     &__page {
         height: 94.5vh;
         background: #EAF2FD;
+
+        @media screen and (max-width: 768px) {
+            height: 94vh;
+        }
     }
 
-    &__block {
+    &__block-edit {
         width: 704px;
         height: 511px;
         display: flex;
@@ -207,6 +216,12 @@ export default {
         top: 20px;
         padding: 64px;
 
+        @media screen and (max-width: 576px) {
+            width: 552px !important;
+            height: 461px !important;
+            padding: 48px !important;
+        }
+
         & form {
             display: flex;
             flex-direction: column;
@@ -215,6 +230,10 @@ export default {
 
     &__input {
         width: 576px;
+
+        @media screen and (max-width: 576px) {
+            width: 456px !important;
+        }
 
         display: flex;
         justify-content: space-between;
@@ -241,6 +260,10 @@ export default {
 
             &:hover, &:focus {
                 border: 1px solid rgba(47, 128, 237, 1);
+            }
+
+            @media screen and (max-width: 576px) {
+                width: 288px !important;
             }
         }
 

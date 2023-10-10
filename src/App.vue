@@ -32,9 +32,17 @@ export default {
   color: rgba(84, 84, 84, 1);
 }
 
+@media screen and (max-width: 768px) {
+  * {
+    font-size: 12px;
+    line-height: 19px;
+  }
+}
+
 *,
 *::before,
 *::after {
+  max-width: 100%;
   box-sizing: border-box;
 }
 
@@ -42,6 +50,30 @@ export default {
   width: 100%;
   max-width: 990px;
   margin: 0 auto;
+}
+
+@media screen and (max-width: 992px) {
+  .container {
+    max-width: 928px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    max-width: 704px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .container {
+    max-width: 552px;
+  }
+}
+
+@media screen and (max-width: 376px) {
+  .container {
+    max-width: 352px;
+  }
 }
 
 .Vue-Toastification__toast--default.my-custom-toast-class {

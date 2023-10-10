@@ -6,8 +6,12 @@ import './validators'
 import Toast from 'vue-toastification'
 import 'vue-toastification/dist/index.css'
 
-createApp(App)
+const app = createApp(App)
+
+app
     .use(store)
     .use(router)
     .use(Toast)
     .mount('#app')
+
+app.config.globalProperties.window = window

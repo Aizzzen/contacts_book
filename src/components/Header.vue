@@ -46,13 +46,27 @@ export default {
     height: 48px;
     padding: 0 48px 0 48px;
     gap: 16px;
+    @media screen and (max-width: 992px) {
+        padding: 0 32px 0 32px;
+    }
+    @media screen and (max-width: 376px) {
+        padding: 0 12px 0 12px;
+    }
 
     &__icon {
         padding-top: 7px;
+        @media screen and (max-width: 376px) {
+            padding-top: 12px;
+            margin-right: -10px;
+        }
 
         & img {
             width: 42px;
             height: 32px;
+            @media screen and (max-width: 376px) {
+                width: 31px;
+                height: 24px;
+            }
         }
     }
 
@@ -63,6 +77,11 @@ export default {
         text-transform: uppercase;
         color: #E0E0E0;
         padding-top: 12px;
+        @media screen and (max-width: 376px) {
+            font-size: 14px;
+            line-height: 17px;
+            padding-top: 16px;
+        }
     }
 
     &__form {
@@ -74,6 +93,11 @@ export default {
             font-weight: 700;
             line-height: 24px;
             color: rgba(221, 221, 221, 1);
+            @media screen and (max-width: 768px) {
+                font-size: 14px;
+                line-height: 17px;
+                padding-top: 14px;
+            }
 
             &:before {
                 content: url("../assets/add-contact-icon.png");
@@ -83,6 +107,13 @@ export default {
                 position: relative;
                 right: 6px;
                 top: 3px;
+                @media screen and (max-width: 768px) {
+                    width: 16px;
+                    height: 16px;
+                    position: relative;
+                    right: 10px;
+                    top: -3px;
+                }
             }
         }
 
@@ -94,6 +125,11 @@ export default {
             font-weight: 700;
             line-height: 24px;
             color: rgba(221, 221, 221, 1);
+            @media screen and (max-width: 768px) {
+                font-size: 14px;
+                line-height: 17px;
+                padding-top: 14px;
+            }
 
             &_first-letter {
                 position: relative;
@@ -108,6 +144,14 @@ export default {
                 text-align: center;
                 margin-top: 2px;
                 margin-right: 8px;
+                @media screen and (max-width: 768px) {
+                    width: 20px;
+                    height: 20px;
+                    font-size: 10px;
+                    line-height: 12px;
+                    padding: 3px;
+                    margin-top: 0;
+                }
             }
         }
 
@@ -115,6 +159,13 @@ export default {
             display: flex;
             align-items: center;
             padding-top: 3px;
+
+            & img {
+                @media screen and (max-width: 768px) {
+                    width: 14px;
+                    height: 14px;
+                }
+            }
         }
     }
 }

@@ -1,6 +1,11 @@
 <template>
     <div class="contacts__table">
-        <div class="contacts__table-header">
+        <div v-if="window.outerWidth <= 576" class="contacts__table-header">
+            <p>контакт</p>
+            <p>телефон / e-mail</p>
+            <p>создан</p>
+        </div>
+        <div v-else class="contacts__table-header">
             <p>контакт</p>
             <p>телефон</p>
             <p>e-mail</p>
@@ -61,6 +66,31 @@ export default {
                     min-width: 296px;
                     width: 100%;
                 }
+                @media screen and (max-width: 768px) {
+                    &:nth-child(1) {
+                        min-width: 240px;
+                    }
+                }
+                @media screen and (max-width: 576px) {
+                    &:nth-child(1) {
+                        min-width: 184px;
+                    }
+                    &:nth-child(2) {
+                        min-width: 240px;
+                    }
+                    &:nth-child(3) {
+                        min-width: 184px;
+                        text-align: right;
+                    }
+                }
+                @media screen and (max-width: 376px) {
+                    &:nth-child(1) {
+                        min-width: 143px;
+                    }
+                    &:nth-child(2) {
+                        min-width: 143px;
+                    }
+                }
 
                 &:nth-child(2) {
                     min-width: 112px;
@@ -70,6 +100,10 @@ export default {
                 &:nth-child(3) {
                     min-width: 208px;
                     width: 100%;
+                    @media screen and (max-width: 376px) {
+                        min-width: 58px;
+                        text-align: right;
+                    }
                 }
 
                 &:nth-child(4) {

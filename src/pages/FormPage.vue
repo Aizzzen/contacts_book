@@ -159,11 +159,20 @@ export default {
         line-height: 39px;
         position: relative;
         bottom: 24px;
+
+        @media screen and (max-width: 768px) {
+            font-size: 24px;
+            line-height: 29px;
+        }
     }
 
     &__page {
         height: 94.5vh;
         background: #EAF2FD;
+
+        @media screen and (max-width: 768px) {
+            height: 94vh;
+        }
     }
 
     &__block {
@@ -178,6 +187,12 @@ export default {
         top: 20px;
         padding: 64px;
 
+        @media screen and (max-width: 576px) {
+            width: 552px !important;
+            height: 405px !important;
+            padding: 48px !important;
+        }
+
         & form {
             display: flex;
             flex-direction: column;
@@ -186,6 +201,10 @@ export default {
 
     &__input {
         width: 576px;
+
+        @media screen and (max-width: 576px) {
+            width: 456px !important;
+        }
 
         display: flex;
         justify-content: space-between;
@@ -212,6 +231,10 @@ export default {
 
             &:hover, &:focus {
                 border: 1px solid rgba(47, 128, 237, 1);
+            }
+
+            @media screen and (max-width: 576px) {
+                width: 288px !important;
             }
         }
 

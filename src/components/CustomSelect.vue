@@ -1,5 +1,5 @@
 <template>
-    <div class="select" :style="isLong ? 'width: 408px' : 'width: 235px; text-transform: uppercase;'">
+    <div class="select" :class="isLong ? 'isLong' : 'isShort'">
         <div class="select__title" :style="isEmpty && 'border-color: rgba(235, 87, 87, 1); color: rgba(235, 87, 87, 1);'">
             <span v-if="isLong" class="selected" style="font-weight: 400">{{ category }}</span>
             <span v-else class="selected" style="font-weight: 700">Все</span>
@@ -171,4 +171,23 @@ export default {
   display: block;
   opacity: 1;
 }
+
+.isLong {
+    width: 408px;
+
+    @media screen and (max-width: 576px) {
+        width: 288px !important;
+    }
+}
+
+.isShort {
+    width: 235px;
+    text-transform: uppercase;
+
+    @media screen and (max-width: 376px) {
+        width: 219px;
+    }
+
+}
+
 </style>

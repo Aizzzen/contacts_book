@@ -7,7 +7,9 @@
                 @sort-by-category="sortByCategory"
             />
             <router-link to="/form">
-                <button class="subheader__button">Добавить контакт</button>
+                <button class="subheader__button">
+                    {{ window.outerWidth <= 376 ? "Добавить" : "Добавить контакт" }}
+                </button>
             </router-link>
         </div>
     </section>
@@ -101,6 +103,10 @@ export default {
       top: 15%;
       right: 4%;
     }
+      @media screen and (max-width: 376px) {
+          width: 117px;
+      }
+
   }
 }
 
