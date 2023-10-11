@@ -18,18 +18,31 @@ export default {
 <style>
     #toast-message-block {
         visibility: hidden;
-        min-width: 250px;
-        margin-left: -125px;
-        background-color: #333;
+        min-width: 150px;
         color: #fff;
         text-align: center;
-        border-radius: 2px;
-        padding: 16px;
         position: fixed;
         z-index: 1;
-        left: 50%;
-        bottom: 30px;
-        font-size: 17px;
+        left: 32px;
+        bottom: 48px;
+
+        background-color: rgba(255, 255, 255, 1);
+        box-shadow: 0 0 16px 0 rgba(176, 197, 222, 0.5);
+        height: 56px;
+        padding: 12px 12px 16px 8px;
+        border-radius: 4px;
+        gap: 12px;
+        font-size: 14px;
+        line-height: 22px;
+        color: rgba(84, 84, 84, 1);
+        cursor: default;
+
+        &:before {
+            content: url("../assets/toast-success.png");
+            position: relative;
+            top: 5px;
+            margin-right: 8px;
+        }
     }
 
     #toast-message-block.show {
@@ -39,22 +52,22 @@ export default {
     }
 
     @-webkit-keyframes fadein {
-        from {bottom: 0; opacity: 0;}
-        to {bottom: 30px; opacity: 1;}
+        from {bottom: 48px; left: -300px; opacity: 0;}
+        to {bottom: 48px; left: 32px; opacity: 1;}
     }
 
     @keyframes fadein {
-        from {bottom: 0; opacity: 0;}
-        to {bottom: 30px; opacity: 1;}
+        from {bottom: 48px; left: -300px; opacity: 0;}
+        to {bottom: 48px; left: 32px; opacity: 1;}
     }
 
     @-webkit-keyframes fadeout {
-        from {bottom: 30px; opacity: 1;}
-        to {bottom: 0; opacity: 0;}
+        from {bottom: 48px; left: 32px; opacity: 1;}
+        to {bottom: 48px; left: -300px; opacity: 0;}
     }
 
     @keyframes fadeout {
-        from {bottom: 30px; opacity: 1;}
-        to {bottom: 0; opacity: 0;}
+        from {bottom: 48px; left: 32px; opacity: 1;}
+        to {bottom: 48px; left: -300px; opacity: 0;}
     }
 </style>

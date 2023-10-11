@@ -86,23 +86,6 @@ export default {
   }
 }
 
-.Vue-Toastification__toast--default.my-custom-toast-class {
-  background-color: rgba(255, 255, 255, 1);
-  margin-left: 32px;
-  margin-bottom: 48px;
-  box-shadow: 0 0 16px 0 rgba(176, 197, 222, 0.5);
-  border-radius: 4px;
-  gap: 12px;
-  cursor: default;
-
-  &:before {
-    content: url("./assets/toast-success.png");
-    position: relative;
-    top: 2px;
-    margin-right: 4px;
-  }
-}
-
 a {
   text-decoration: none;
 }
