@@ -18,7 +18,7 @@ export default {
 <style>
     #toast-message-block {
         visibility: hidden;
-        min-width: 150px;
+        min-width: 180px;
         color: #fff;
         text-align: center;
         position: fixed;
@@ -43,6 +43,23 @@ export default {
             top: 5px;
             margin-right: 8px;
         }
+
+        @media screen and (max-width: 576px) {
+            bottom: 0;
+            top: 70px;
+            padding: 6px 20px 12px 16px;
+            background: rgba(84, 84, 84, 1);
+            min-width: 137px;
+            height: 44px;
+            border-radius: 40px;
+            gap: 12px;
+            box-shadow: 0 0 20px 0 rgba(176, 197, 222, 0.5);
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 19px;
+            color: rgba(255, 255, 255, 1);
+            left: 40%;
+        }
     }
 
     #toast-message-block.show {
@@ -52,22 +69,49 @@ export default {
     }
 
     @-webkit-keyframes fadein {
-        from {bottom: 48px; left: -300px; opacity: 0;}
-        to {bottom: 48px; left: 32px; opacity: 1;}
+        from {left: -300px; opacity: 0;}
+        to {left: 32px; opacity: 1;}
     }
 
     @keyframes fadein {
-        from {bottom: 48px; left: -300px; opacity: 0;}
-        to {bottom: 48px; left: 32px; opacity: 1;}
+        from {left: -300px; opacity: 0;}
+        to {left: 32px; opacity: 1;}
     }
 
     @-webkit-keyframes fadeout {
-        from {bottom: 48px; left: 32px; opacity: 1;}
-        to {bottom: 48px; left: -300px; opacity: 0;}
+        from {left: 32px; opacity: 1;}
+        to {left: -300px; opacity: 0;}
     }
 
     @keyframes fadeout {
-        from {bottom: 48px; left: 32px; opacity: 1;}
-        to {bottom: 48px; left: -300px; opacity: 0;}
+        from {left: 32px; opacity: 1;}
+        to {left: -300px; opacity: 0;}
     }
+
+    #toast-message-block.show_mobile {
+        visibility: visible;
+        -webkit-animation: fadein_mobile 0.5s, fadeout_mobile 0.5s 2.5s;
+        animation: fadein_mobile 0.5s, fadeout_mobile 0.5s 2.5s;
+    }
+
+    @-webkit-keyframes fadein_mobile {
+        from {left: -40%; opacity: 0;}
+        to {left: 40%; opacity: 1;}
+    }
+
+    @keyframes fadein_mobile {
+        from {left: -40%; opacity: 0;}
+        to {left: 40%; opacity: 1;}
+    }
+
+    @-webkit-keyframes fadeout_mobile {
+        from {left: 40%; opacity: 1;}
+        to {left: -40%; opacity: 0;}
+    }
+
+    @keyframes fadeout_mobile {
+        from {left: 40%; opacity: 1;}
+        to {left: -40%; opacity: 0;}
+    }
+
 </style>
