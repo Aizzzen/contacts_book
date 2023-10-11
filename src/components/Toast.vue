@@ -95,23 +95,23 @@ export default {
     }
 
     @-webkit-keyframes fadein_mobile {
-        from {left: -500px; opacity: 0;}
-        to {left: 220px; opacity: 1;}
+        from {top: -150px; opacity: 0;}
+        to {top: 70px; opacity: 1;}
     }
 
     @keyframes fadein_mobile {
-        from {left: -500px; opacity: 0;}
-        to {left: 220px; opacity: 1;}
+        from {top: -150px; opacity: 0;}
+        to {top: 70px; opacity: 1;}
     }
 
     @-webkit-keyframes fadeout_mobile {
-        from {left: 220px; opacity: 1;}
-        to {left: -500px; opacity: 0;}
+        from {top: 70px; opacity: 1;}
+        to {top: -150px; opacity: 0;}
     }
 
     @keyframes fadeout_mobile {
-        from {left: 220px; opacity: 1;}
-        to {left: -500px; opacity: 0;}
+        from {top: 70px; opacity: 1;}
+        to {top: -150px; opacity: 0;}
     }
 
 </style>

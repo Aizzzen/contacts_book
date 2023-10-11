@@ -50,8 +50,8 @@
                         />
                         <error-message
                             name="error"
-                            v-if="formData.phone === undefined"
-                            :message="'Поле не может быть пустым'"
+                            v-if="formData.phone === undefined || phoneErrorMsg"
+                            :message="phoneErrorMsg ? 'Некорректный номер' : 'Поле не может быть пустым'"
                         />
                     </div>
                 </div>
@@ -133,6 +133,7 @@ export default {
             },
             isEmpty: false,
             results: "",
+            phoneErrorMsg: false
         }
     },
     methods: {
@@ -141,8 +142,13 @@ export default {
             "CREATE_TOAST_MESSAGE"
         ]),
         async handleSubmit() {
-            if (this.formData.category === "Не выбрано") {
+            if (this.formData.category === "Не выбрано" && this.formData.phone.length < 12) {
                 this.isEmpty = true
+                this.phoneErrorMsg = true
+            } else if (this.formData.category === "Не выбрано") {
+                this.isEmpty = true
+            } else if (this.formData.phone.length < 12) {
+                this.phoneErrorMsg = true
             } else {
                 const newContact = {
                     id: Math.floor(Math.random() * 100000),
