@@ -116,14 +116,19 @@ input[id*='MazInput'] {
   height: 40px !important;
 }
 
-div .m-input-wrapper {
+div .m-input-wrapper.--default-border {
+  border-color: rgba(235, 87, 87, 1) !important;
+}
+
+div .m-input.--has-z-2 .m-input-wrapper {
+  border-color: rgba(221, 221, 221, 1) !important;
+
   &:hover, &:focus {
     border-color: rgba(47, 128, 237, 1) !important;
   }
 }
 
 .m-input-wrapper.--default-border {
-  //border-radius: 4px !important;
   box-shadow: none !important;
 }
 

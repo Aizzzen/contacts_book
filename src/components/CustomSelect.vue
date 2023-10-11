@@ -1,6 +1,6 @@
 <template>
     <div class="select" :class="isLong ? 'isLong' : 'isShort'">
-        <div class="select__title" :style="isEmpty && 'border-color: rgba(235, 87, 87, 1); color: rgba(235, 87, 87, 1);'">
+        <div class="select__title" :style="isSelectEmpty ? 'border-color: rgba(235, 87, 87, 1); color: rgba(235, 87, 87, 1);' : ''">
             <span v-if="isLong" class="selected" style="font-weight: 400">{{ category }}</span>
             <span v-else class="selected" style="font-weight: 700">Все</span>
             <div class="select__icon"></div>
@@ -33,7 +33,7 @@ export default {
                 return "Не выбрано"
             }
         },
-        isEmpty: {
+        isSelectEmpty: {
             type: Boolean,
         }
     },

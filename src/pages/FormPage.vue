@@ -46,16 +46,13 @@
                             @update="results = $event"
                             :success="results?.isValid"
                             class="form__input-phone"
-                            :rules="[rules.counter]"
+                            maxLength="16"
                         />
-<!--                            :style="errors.phone ? 'border-color: rgba(235, 87, 87, 1); &#45;&#45;placeholder-color: rgba(235, 87, 87, 1)' : ''"-->
-<!--                            maxlength="12"-->
-                        <div v-if="errors.phone" class="form__validate">
-                            <span class="form__validate-msg">
-                                <div class="form__validate-msg-icon"/>
-                            {{ errors.phone }}
-                        </span>
-                        </div>
+                        <error-message
+                            name="error"
+                            v-if="formData.phone === undefined"
+                            :message="'Поле не может быть пустым'"
+                        />
                     </div>
                 </div>
                 <div class="form__input">
@@ -85,16 +82,16 @@
                         <custom-select
                             :category="formData.category"
                             :isLong="true"
-                            :isEmpty="isEmpty"
+                            :isSelectEmpty="isEmpty"
                             @not-empty="isNotEmpty"
                             @update-category="updateCategory"
                         />
-                        <div v-if="isEmpty" class="form__validate" style="top: 5px">
-                            <span class="form__validate-msg">
-                                <div class="form__validate-msg-icon"/>
-                            Поле не может быть пустым
-                        </span>
-                        </div>
+                        <error-message
+                            name="error"
+                            v-if="isEmpty"
+                            :message="'Поле не может быть пустым'"
+                            style="top: 7px"
+                        />
                     </div>
                 </div>
                 <form-save-button/>
@@ -105,15 +102,15 @@
 
 <script>
 import {mapActions} from "vuex";
+import MazPhoneNumberInput from 'maz-ui/components/MazPhoneNumberInput'
+import {Form, Field} from "vee-validate";
 import AppHeader from "@/components/Header.vue";
 import CustomSelect from "@/components/CustomSelect.vue";
-import {Form, Field} from "vee-validate";
+import FormSaveButton from "@/components/FormSaveButton.vue";
+import ErrorMessage from "@/components/ErrorMessage.vue";
 import {showToast} from "@/customToast";
 import {formatDate} from "@/utils/formatDate";
-import FormSaveButton from "@/components/FormSaveButton.vue";
-import MazPhoneNumberInput from 'maz-ui/components/MazPhoneNumberInput'
 import {formatPhoneNumber} from "@/utils/formatPhoneNumber";
-
 
 export default {
     name: 'form-page',
@@ -123,7 +120,8 @@ export default {
         CustomSelect,
         Form,
         Field,
-        MazPhoneNumberInput
+        MazPhoneNumberInput,
+        ErrorMessage
     },
     data() {
         return {
@@ -135,9 +133,6 @@ export default {
             },
             isEmpty: false,
             results: "",
-            rules: {
-                counter: value => value.length <= 11 || 'Max 11 characters',
-            },
         }
     },
     methods: {
@@ -298,6 +293,7 @@ export default {
                 position: absolute;
                 bottom: 28px;
                 right: 10px;
+                z-index: 1;
             }
         }
     }

@@ -47,13 +47,13 @@
                             @update="results = $event"
                             :success="results?.isValid"
                             class="form__input-phone"
+                            maxLength="16"
                         />
-                        <div v-if="errors.phone" class="form__validate">
-                            <span class="form__validate-msg">
-                                <div class="form__validate-msg-icon"/>
-                            {{ errors.phone }}
-                        </span>
-                        </div>
+                        <error-message
+                            name="error"
+                            v-if="formData.phone === undefined"
+                            :message="'Поле не может быть пустым'"
+                        />
                     </div>
                 </div>
                 <div class="form__input">
@@ -83,16 +83,16 @@
                         <custom-select
                             :category="formData.category"
                             :isLong="true"
-                            :isEmpty="isEmpty"
+                            :isSelectEmpty="isSelectEmpty"
                             @not-empty="isNotEmpty"
                             @update-category="updateCategory"
                         />
-                        <div v-if="isEmpty" class="form__validate" style="top: 5px">
-                            <span class="form__validate-msg">
-                                <div class="form__validate-msg-icon"/>
-                            Поле не может быть пустым
-                        </span>
-                        </div>
+                        <error-message
+                            name="error"
+                            v-if="isSelectEmpty"
+                            :message="'Поле не может быть пустым'"
+                            style="top: 7px"
+                        />
                     </div>
                 </div>
                 <div class="form__input" style="justify-content: normal">
@@ -112,15 +112,15 @@
 
 <script>
 import {mapGetters, mapActions} from "vuex";
+import MazPhoneNumberInput from 'maz-ui/components/MazPhoneNumberInput'
+import {Form, Field} from "vee-validate";
+import store from "@/store";
 import AppHeader from "@/components/Header.vue";
 import CustomSelect from "@/components/CustomSelect.vue";
-import {Form, Field} from "vee-validate";
-import {showToast} from "@/customToast";
-import store from "@/store";
 import FormSaveButton from "@/components/FormSaveButton.vue";
-import MazPhoneNumberInput from 'maz-ui/components/MazPhoneNumberInput'
+import ErrorMessage from "@/components/ErrorMessage.vue";
 import {formatPhoneNumber} from "@/utils/formatPhoneNumber";
-
+import {showToast} from "@/customToast";
 
 export default {
     name: 'form-edit-page',
@@ -130,7 +130,8 @@ export default {
         CustomSelect,
         Form,
         Field,
-        MazPhoneNumberInput
+        MazPhoneNumberInput,
+        ErrorMessage
     },
     data() {
         return {
@@ -142,7 +143,7 @@ export default {
                 category: "",
                 created_at: "",
             },
-            isEmpty: false,
+            isSelectEmpty: false,
             results: ""
         }
     },
@@ -165,7 +166,7 @@ export default {
         ]),
         async handleSubmit() {
             if (this.formData.category === "Не выбрано") {
-                this.isEmpty = true
+                this.isSelectEmpty = true
             } else {
                 const updatedContact = {
                     ...this.formData,
@@ -180,13 +181,13 @@ export default {
             this.formData.category = newName;
         },
         isNotEmpty(newValue) {
-            this.isEmpty = newValue;
+            this.isSelectEmpty = newValue;
         },
         deleteContact(contactId) {
             this.DELETE_CONTACT(contactId)
             this.$router.push("/");
             showToast('Контакт удалён')
-        }
+        },
     },
 }
 </script>
@@ -311,26 +312,6 @@ export default {
             left: 117px;
             @media screen and (max-width: 376px) {
                 left: 39px;
-            }
-        }
-    }
-
-    &__validate {
-        position: relative;
-
-        &-msg {
-            position: absolute;
-            display: block;
-            right: 0;
-            color: rgba(235, 87, 87, 1);
-            font-size: 10px;
-            line-height: 16px;
-
-            &-icon {
-                content: url("../assets/input-error-icon.png");
-                position: absolute;
-                bottom: 28px;
-                right: 10px;
             }
         }
     }
