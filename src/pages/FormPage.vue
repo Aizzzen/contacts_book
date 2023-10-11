@@ -17,6 +17,7 @@
                             type="text"
                             placeholder='Например "Андрей"...'
                             :style="errors.fullName ? 'border-color: rgba(235, 87, 87, 1); --placeholder-color: rgba(235, 87, 87, 1)' : ''"
+                            class="form__input-input"
                         />
                         <div v-if="errors.fullName" class="form__validate">
                             <span class="form__validate-msg">
@@ -29,16 +30,26 @@
                 <div class="form__input">
                     <label for="phone">Телефон</label>
                     <div>
-                        <Field
-                            as="input"
-                            name="phone"
-                            rules="required"
-                            v-model.trim="formData.phone"
-                            type="tel"
-                            placeholder="+7(___)-___-__-__"
-                            :style="errors.phone ? 'border-color: rgba(235, 87, 87, 1); --placeholder-color: rgba(235, 87, 87, 1)' : ''"
-                            maxlength="12"
+                        <MazPhoneNumberInput
+                            v-model="formData.phone"
+                            color="transparent"
+                            :onlyCountries="['RU']"
+                            :no-search="true"
+                            :noCountrySelector="true"
+                            :noExample="true"
+                            :translations="{
+                              phoneInput: {
+                                placeholder: '',
+                                example: '',
+                              },
+                            }"
+                            @update="results = $event"
+                            :success="results?.isValid"
+                            class="form__input-phone"
+                            :rules="[rules.counter]"
                         />
+<!--                            :style="errors.phone ? 'border-color: rgba(235, 87, 87, 1); &#45;&#45;placeholder-color: rgba(235, 87, 87, 1)' : ''"-->
+<!--                            maxlength="12"-->
                         <div v-if="errors.phone" class="form__validate">
                             <span class="form__validate-msg">
                                 <div class="form__validate-msg-icon"/>
@@ -58,6 +69,7 @@
                             type="email"
                             placeholder="Например pochta@domain.ru"
                             :style="errors.email ? 'border-color: rgba(235, 87, 87, 1); --placeholder-color: rgba(235, 87, 87, 1)' : ''"
+                            class="form__input-input"
                         />
                         <div v-if="errors.email" class="form__validate">
                             <span class="form__validate-msg">
@@ -97,9 +109,11 @@ import AppHeader from "@/components/Header.vue";
 import CustomSelect from "@/components/CustomSelect.vue";
 import {Form, Field} from "vee-validate";
 import {showToast} from "@/customToast";
-import {formatPhoneNumber} from "@/utils/formatPhoneNumber";
 import {formatDate} from "@/utils/formatDate";
 import FormSaveButton from "@/components/FormSaveButton.vue";
+import MazPhoneNumberInput from 'maz-ui/components/MazPhoneNumberInput'
+import {formatPhoneNumber} from "@/utils/formatPhoneNumber";
+
 
 export default {
     name: 'form-page',
@@ -108,17 +122,22 @@ export default {
         AppHeader,
         CustomSelect,
         Form,
-        Field
+        Field,
+        MazPhoneNumberInput
     },
     data() {
         return {
             formData: {
                 fullName: "",
-                phone: "",
+                phone: "+7",
                 email: "",
                 category: "Не выбрано",
             },
-            isEmpty: false
+            isEmpty: false,
+            results: "",
+            rules: {
+                counter: value => value.length <= 11 || 'Max 11 characters',
+            },
         }
     },
     methods: {
@@ -219,11 +238,11 @@ export default {
             line-height: 17px;
         }
 
-        & input {
+        &-input {
             width: 408px;
             height: 40px;
             padding: 8px;
-            border-radius: 4px;
+            border-radius: 8px;
             outline: none;
             border: 1px solid rgba(221, 221, 221, 1);
             --placeholder-color: #999999;
@@ -243,6 +262,23 @@ export default {
 
         &:not(:last-child) {
             margin-bottom: 16px;
+        }
+
+        &-phone {
+            width: 408px;
+            height: 40px;
+            outline: none;
+            --placeholder-color: #999999;
+            box-shadow: none;
+            &::placeholder {
+                color: var(--placeholder-color);
+            }
+            @media screen and (max-width: 576px) {
+                width: 288px !important;
+            }
+            @media screen and (max-width: 376px) {
+                width: 228px !important;
+            }
         }
     }
 

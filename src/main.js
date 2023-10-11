@@ -5,6 +5,7 @@ import router from "@/router"
 import './validators'
 import Toast from 'vue-toastification'
 import 'vue-toastification/dist/index.css'
+import 'maz-ui/css/main.css'
 
 const app = createApp(App)
 

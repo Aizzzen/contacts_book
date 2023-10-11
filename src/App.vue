@@ -97,4 +97,42 @@ a {
   text-decoration: none;
 }
 
+.maz-border-danger {
+  border-color: rgba(221, 221, 221, 1) !important;
+}
+
+.m-input.--has-z-2 .m-input-wrapper {
+  overflow: visible !important;
+}
+
+.maz-border-success {
+  border-color: rgba(221, 221, 221, 1) !important;
+}
+
+input[id*='MazInput'] {
+  padding-right: 10px !important;
+  padding-left: 10px !important;;
+  color: rgba(84, 84, 84, 1) !important;
+  height: 40px !important;
+}
+
+div .m-input-wrapper {
+  &:hover, &:focus {
+    border-color: rgba(47, 128, 237, 1) !important;
+  }
+}
+
+.m-input-wrapper.--default-border {
+  //border-radius: 4px !important;
+  box-shadow: none !important;
+}
+
+.m-input-wrapper {
+  border-width: 1px !important;
+
+  transition-timing-function: linear !important;
+  -webkit-transition-duration: 0s !important;
+  transition-duration: 0s !important;
+}
+
 </style>
