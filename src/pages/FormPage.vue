@@ -108,9 +108,9 @@ import AppHeader from "@/components/Header.vue";
 import CustomSelect from "@/components/CustomSelect.vue";
 import FormSaveButton from "@/components/FormSaveButton.vue";
 import ErrorMessage from "@/components/ErrorMessage.vue";
-import {showToast} from "@/customToast";
 import {formatDate} from "@/utils/formatDate";
 import {formatPhoneNumber} from "@/utils/formatPhoneNumber";
+import {showToast} from "@/utils/showToast";
 
 export default {
     name: 'form-page',
@@ -137,7 +137,8 @@ export default {
     },
     methods: {
         ...mapActions([
-            "CREATE_CONTACT"
+            "CREATE_CONTACT",
+            "CREATE_TOAST_MESSAGE"
         ]),
         async handleSubmit() {
             if (this.formData.category === "Не выбрано") {
@@ -150,8 +151,9 @@ export default {
                     created_at: formatDate(new Date())
                 }
                 await this.CREATE_CONTACT(newContact)
+                this.CREATE_TOAST_MESSAGE("Контакт успешно создан")
+                showToast()
                 this.$router.push("/");
-                showToast('Контакт успешно создан')
             }
         },
         updateCategory(newName) {

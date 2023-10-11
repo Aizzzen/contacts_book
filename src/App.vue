@@ -1,12 +1,17 @@
 <template>
   <router-view></router-view>
+    <toast-message
+            :message="this.TOAST_MESSAGE"
+    />
 </template>
 
 <script>
-import {mapActions} from "vuex";
+import {mapActions, mapGetters} from "vuex";
+import ToastMessage from "@/components/Toast.vue";
 
 export default {
     name: 'App',
+    components: {ToastMessage},
     methods: {
         ...mapActions([
             "GET_CONTACTS",
@@ -14,6 +19,11 @@ export default {
     },
     mounted() {
         this.GET_CONTACTS();
+    },
+    computed: {
+        ...mapGetters([
+            "TOAST_MESSAGE"
+        ])
     }
 }
 </script>

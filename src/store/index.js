@@ -2,7 +2,8 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    contacts: []
+    contacts: [],
+    toast_message: ""
   },
   getters: {
     CONTACTS:(state) => {
@@ -10,6 +11,9 @@ export default createStore({
     },
     CONTACT_BY_ID:(state) => (contact_id) => {
       return state.contacts.find(item => item.id === contact_id);
+    },
+    TOAST_MESSAGE: (state) => {
+      return state.toast_message;
     }
   },
   mutations: {
@@ -26,7 +30,10 @@ export default createStore({
     DELETE_CONTACT_DATA: (state, contact_id) => {
       const index = state.contacts.findIndex(item => item.id === contact_id);
       state.contacts.splice(index, 1);
-    }
+    },
+    ADD_TOAST_MESSAGE: (state, message) => {
+      state.toast_message = message;
+    },
   },
   actions: {
     GET_CONTACTS({commit}) {
@@ -45,6 +52,9 @@ export default createStore({
     },
     DELETE_CONTACT({commit}, data) {
       commit("DELETE_CONTACT_DATA", data)
+    },
+    CREATE_TOAST_MESSAGE({commit}, data) {
+      commit("ADD_TOAST_MESSAGE", data)
     },
   },
   modules: {
