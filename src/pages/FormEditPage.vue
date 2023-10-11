@@ -185,7 +185,7 @@ export default {
         isNotEmpty(newValue) {
             this.isSelectEmpty = newValue;
         },
-        deleteContact(contactId) {
+        async deleteContact(contactId) {
             this.DELETE_CONTACT(contactId)
             this.CREATE_TOAST_MESSAGE("Контакт удалён")
             showToast()

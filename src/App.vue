@@ -1,7 +1,7 @@
 <template>
   <router-view></router-view>
     <toast-message
-            :message="this.TOAST_MESSAGE"
+            :message="this.TOAST_MESSAGE()"
     />
 </template>
 
@@ -13,17 +13,18 @@ export default {
     name: 'App',
     components: {ToastMessage},
     methods: {
+        ...mapGetters([
+            "TOAST_MESSAGE"
+        ]),
         ...mapActions([
             "GET_CONTACTS",
+        ]),
+        ...mapGetters([
+            "TOAST_MESSAGE"
         ]),
     },
     mounted() {
         this.GET_CONTACTS();
-    },
-    computed: {
-        ...mapGetters([
-            "TOAST_MESSAGE"
-        ])
     }
 }
 </script>

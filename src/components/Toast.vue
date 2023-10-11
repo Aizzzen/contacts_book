@@ -58,7 +58,7 @@ export default {
             font-weight: 400;
             line-height: 19px;
             color: rgba(255, 255, 255, 1);
-            left: 40%;
+            left: 220px;
         }
     }
 
@@ -95,23 +95,23 @@ export default {
     }
 
     @-webkit-keyframes fadein_mobile {
-        from {left: -40%; opacity: 0;}
-        to {left: 40%; opacity: 1;}
+        from {left: -500px; opacity: 0;}
+        to {left: 220px; opacity: 1;}
     }
 
     @keyframes fadein_mobile {
-        from {left: -40%; opacity: 0;}
-        to {left: 40%; opacity: 1;}
+        from {left: -500px; opacity: 0;}
+        to {left: 220px; opacity: 1;}
     }
 
     @-webkit-keyframes fadeout_mobile {
-        from {left: 40%; opacity: 1;}
-        to {left: -40%; opacity: 0;}
+        from {left: 220px; opacity: 1;}
+        to {left: -500px; opacity: 0;}
     }
 
     @keyframes fadeout_mobile {
-        from {left: 40%; opacity: 1;}
-        to {left: -40%; opacity: 0;}
+        from {left: 220px; opacity: 1;}
+        to {left: -500px; opacity: 0;}
     }
 
 </style>
