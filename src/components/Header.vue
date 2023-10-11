@@ -49,12 +49,18 @@ export default {
     @media screen and (max-width: 992px) {
         padding: 0 32px 0 32px;
     }
-    @media screen and (max-width: 376px) {
+    @media screen and (max-width: 576px) {
         padding: 0 12px 0 12px;
     }
+    //@media screen and (max-width: 376px) {
+    //    padding: 0 12px 0 12px;
+    //}
 
     &__icon {
         padding-top: 7px;
+        @media screen and (max-width: 576px) {
+            margin-right: -10px;
+        }
         @media screen and (max-width: 376px) {
             padding-top: 12px;
             margin-right: -10px;
@@ -77,11 +83,16 @@ export default {
         text-transform: uppercase;
         color: #E0E0E0;
         padding-top: 12px;
-        @media screen and (max-width: 376px) {
+        @media screen and (max-width: 576px) {
             font-size: 14px;
             line-height: 17px;
             padding-top: 16px;
         }
+        //@media screen and (max-width: 376px) {
+        //    font-size: 14px;
+        //    line-height: 17px;
+        //    padding-top: 16px;
+        //}
     }
 
     &__form {

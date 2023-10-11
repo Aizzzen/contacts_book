@@ -132,7 +132,6 @@ export default {
     top: 4em;
     width: 100%;
     font-weight: 400;
-
     opacity: 0;
     display: none;
     z-index: 1;
