@@ -110,7 +110,7 @@ import FormSaveButton from "@/components/FormSaveButton.vue";
 import ErrorMessage from "@/components/ErrorMessage.vue";
 import {formatDate} from "@/utils/formatDate";
 import {formatPhoneNumber} from "@/utils/formatPhoneNumber";
-import {showToast} from "@/utils/showToast";
+import {imitateSendingToAPI} from "@/utils/imitateSendingToAPI";
 
 export default {
     name: 'form-page',
@@ -158,8 +158,7 @@ export default {
                 }
                 await this.CREATE_CONTACT(newContact)
                 this.CREATE_TOAST_MESSAGE("Контакт успешно создан")
-                showToast()
-                this.$router.push("/");
+                await imitateSendingToAPI()
             }
         },
         updateCategory(newName) {
@@ -167,7 +166,7 @@ export default {
         },
         isNotEmpty(newValue) {
             this.isEmpty = newValue;
-        }
+        },
     },
 }
 </script>

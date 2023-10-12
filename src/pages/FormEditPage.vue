@@ -120,7 +120,7 @@ import CustomSelect from "@/components/CustomSelect.vue";
 import FormSaveButton from "@/components/FormSaveButton.vue";
 import ErrorMessage from "@/components/ErrorMessage.vue";
 import {formatPhoneNumber} from "@/utils/formatPhoneNumber";
-import {showToast} from "@/utils/showToast";
+import {imitateSendingToAPI} from "@/utils/imitateSendingToAPI";
 
 export default {
     name: 'form-edit-page',
@@ -181,9 +181,7 @@ export default {
                 }
                 this.UPDATE_CONTACT(updatedContact)
                 this.CREATE_TOAST_MESSAGE("Контакт успешно изменён")
-                showToast()
-                this.$router.push("/");
-            }
+                await imitateSendingToAPI()            }
         },
         updateCategory(newName) {
             this.formData.category = newName;
@@ -194,8 +192,7 @@ export default {
         async deleteContact(contactId) {
             this.DELETE_CONTACT(contactId)
             this.CREATE_TOAST_MESSAGE("Контакт удалён")
-            showToast()
-            this.$router.push("/");
+            await imitateSendingToAPI()
         },
     },
 }
