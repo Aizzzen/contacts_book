@@ -49,7 +49,6 @@ export default {
             top: 70px;
             padding: 6px 20px 12px 16px;
             background: rgba(84, 84, 84, 1);
-            min-width: 137px;
             height: 44px;
             border-radius: 40px;
             gap: 12px;
@@ -58,7 +57,11 @@ export default {
             font-weight: 400;
             line-height: 19px;
             color: rgba(255, 255, 255, 1);
-            left: 220px;
+            left: 200px;
+        }
+
+        @media screen and (max-width: 376px) {
+            left: 100px;
         }
     }
 
