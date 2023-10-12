@@ -134,4 +134,8 @@ div .m-input.--has-z-2 .m-input-wrapper {
   transition-duration: 0s !important;
 }
 
+//.m-input.--md {
+//  height: 40px !important;
+//}
+
 </style>

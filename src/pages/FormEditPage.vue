@@ -79,7 +79,7 @@
                 </div>
                 <div class="form__input">
                     <label for="input">Категория</label>
-                    <div style="margin-top: -7px; margin-bottom: 7px">
+                    <div :style="window.outerWidth <= 376 ? 'margin-top: 0; margin-bottom: 0' : 'margin-top: -7px; margin-bottom: 7px'">
                         <custom-select
                             :category="formData.category"
                             :isLong="true"

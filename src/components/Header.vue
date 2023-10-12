@@ -52,9 +52,6 @@ export default {
     @media screen and (max-width: 576px) {
         padding: 0 12px 0 12px;
     }
-    //@media screen and (max-width: 376px) {
-    //    padding: 0 12px 0 12px;
-    //}
 
     &__icon {
         padding-top: 7px;
