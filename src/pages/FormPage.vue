@@ -78,7 +78,7 @@
                 </div>
                 <div class="form__input">
                     <label for="input">Категория</label>
-                    <div>
+                    <div :style="window.outerWidth <= 376 ? 'margin-top: 0; margin-bottom: 0' : 'margin-top: -7px; margin-bottom: 7px'">
                         <custom-select
                             :category="formData.category"
                             :isLong="true"
@@ -158,7 +158,7 @@ export default {
                 }
                 await this.CREATE_CONTACT(newContact)
                 this.CREATE_TOAST_MESSAGE("Контакт успешно создан")
-                await imitateSendingToAPI()
+                await imitateSendingToAPI(this.$router)
             }
         },
         updateCategory(newName) {

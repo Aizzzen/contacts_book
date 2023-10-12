@@ -1,6 +1,6 @@
 import {showToast} from "@/utils/showToast";
 
-export const imitateSendingToAPI = () => {
+export const imitateSendingToAPI = (router) => {
     const block = document.getElementById("loader-block");
     const spinner = document.getElementById("loader-spinner");
     block.className = "loader";
@@ -9,6 +9,6 @@ export const imitateSendingToAPI = () => {
         block.className = block.className.replace("loader", "");
         spinner.className = spinner.className.replace("loader__spinner", "");
         showToast()
-        window.location.href = "/"
+        router.push("/");
     }, 3000);
 }

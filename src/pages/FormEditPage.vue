@@ -181,7 +181,7 @@ export default {
                 }
                 this.UPDATE_CONTACT(updatedContact)
                 this.CREATE_TOAST_MESSAGE("Контакт успешно изменён")
-                await imitateSendingToAPI()            }
+                await imitateSendingToAPI(this.$router)            }
         },
         updateCategory(newName) {
             this.formData.category = newName;
@@ -192,7 +192,7 @@ export default {
         async deleteContact(contactId) {
             this.DELETE_CONTACT(contactId)
             this.CREATE_TOAST_MESSAGE("Контакт удалён")
-            await imitateSendingToAPI()
+            await imitateSendingToAPI(this.$router)
         },
     },
 }
